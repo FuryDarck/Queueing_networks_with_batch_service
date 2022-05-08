@@ -2,6 +2,8 @@ e_x = [0, 0, 0]
 
 e_2x = [0, 0, 0]
 
+scv_xk = [0,0,0]
+
 lambd = [2]
 
 c = [1, 3, 2]
@@ -137,7 +139,7 @@ def Utiliz_Factor(lambd_k, e_s, c):
 
 
 # МО входящей группы
-def Mat_expec_incom_group(e_x, e_2x, p, x, b):
+def Mat_expec_incom_group1(e_x, p, x, b):
     i = 1
     h = 0
     g = 0
@@ -152,6 +154,8 @@ def Mat_expec_incom_group(e_x, e_2x, p, x, b):
     for i in range(len(e_x)):
         print(e_x[i])
     return e_x
+
+def Mat_expec_incom_group2(e_2x, p, x, b):
     i = 1
     h = 0
     g = 0
@@ -166,6 +170,11 @@ def Mat_expec_incom_group(e_x, e_2x, p, x, b):
     for i in range(len(e_2x)):
         print(e_2x[i])
     return e_2x
+# Коээфициент вариации входящей группы
+def Coef_variat_incom_gr(e_x,e_2x,scv_xk):
+    for i in range(k):
+        scv_xk[i] = (e_2x[i]/((e_x[i])**2)) - 1
+        print(scv_xk[i])
 # --- end of решение системы методом Гаусса (приведением к треугольному виду)
 print("Исходная система:")
 FancyPrint(myA, myB, None)
@@ -174,4 +183,6 @@ x = Gauss(myA, myB)
 OutFlow(x)
 Utiliz_Factor(lambd_k, e_s, c)
 x.insert(0, 1)
-Mat_expec_incom_group(e_x,e_2x, p, x, b)
+Mat_expec_incom_group1(e_x, p, x, b)
+Mat_expec_incom_group2(e_2x, p, x, b)
+Coef_variat_incom_gr(e_x,e_2x,scv_xk)
