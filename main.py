@@ -8,6 +8,8 @@ lambd_k = [0, 0, 0]
 
 k = 3
 
+ro_k = [0, 0, 0]
+
 e_s = [2, 5.1, 20]
 
 myA = [[0, 0, 0],
@@ -114,19 +116,28 @@ def Gauss(A, B):
                     enumerate(X)))
     return X
 
+
 # Интенсивность входящего потока
 def OutFlow(x):
     for i in range(k):
         lambd_k[i] = lambd[0] * x[i]
     for i in range(len(lambd_k)):
         print(lambd_k[i])
+    return lambd_k
+
+
+# Коэффициент использования
+def Utiliz_Factor(lambd_k, e_s, c):
+    for i in range(k):
+        ro_k[i] = lambd_k[i] * e_s[i] / c[i]
+    for i in range(len(ro_k)):
+        print(ro_k[i])
 
 
 # --- end of решение системы методом Гаусса (приведением к треугольному виду)
-
 print("Исходная система:")
 FancyPrint(myA, myB, None)
 print("Решаем:")
-X = Gauss(myA, myB)
-OutFlow(X)
-
+x = Gauss(myA, myB)
+OutFlow(x)
+Utiliz_Factor(lambd_k, e_s, c)
