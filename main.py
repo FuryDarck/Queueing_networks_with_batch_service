@@ -1,4 +1,6 @@
-import numpy
+e_x = [0, 0, 0]
+
+e_2x = [0, 0, 0]
 
 lambd = [2]
 
@@ -134,6 +136,36 @@ def Utiliz_Factor(lambd_k, e_s, c):
         print(ro_k[i])
 
 
+# МО входящей группы
+def Mat_expec_incom_group(e_x, e_2x, p, x, b):
+    i = 1
+    h = 0
+    g = 0
+    while(i != 4):
+        for j in range(k + 1):
+            g += b[j] * x[j] * p[j][i]
+            h += x[j] * p[j][i]
+        e_x[i-1] = g/h
+        g = 0
+        h = 0
+        i += 1
+    for i in range(len(e_x)):
+        print(e_x[i])
+    return e_x
+    i = 1
+    h = 0
+    g = 0
+    while (i != 4):
+        for j in range(k + 1):
+            g += (b[j]**2) * x[j] * p[j][i]
+            h += x[j] * p[j][i]
+        e_2x[i - 1] = g / h
+        g = 0
+        h = 0
+        i += 1
+    for i in range(len(e_2x)):
+        print(e_2x[i])
+    return e_2x
 # --- end of решение системы методом Гаусса (приведением к треугольному виду)
 print("Исходная система:")
 FancyPrint(myA, myB, None)
@@ -141,3 +173,5 @@ print("Решаем:")
 x = Gauss(myA, myB)
 OutFlow(x)
 Utiliz_Factor(lambd_k, e_s, c)
+x.insert(0, 1)
+Mat_expec_incom_group(e_x,e_2x, p, x, b)
